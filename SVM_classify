@@ -93,6 +93,25 @@ for i=1:1:length(files)
         
         counter = counter + 1;
         label = svmclassify(SVM_classifier, [feat1, feat2]);
+        
+        % Max_Computation
+        
+        sorted = sort(C);
+        sorted_1 = fliplr(transpose(sorted));
+        condition = true;
+        iterator = 1;
+        while condition
+            aux = sorted_1(iterator);
+            index = find(C == aux);
+            if index > 80
+                condition = false;
+                max_pos = index - 1;
+            end
+            iterator = iterator + 1;
+        end
+        
+        
+        
         pitch_f = 0;
         if label
             pitch_s = max_pos;
